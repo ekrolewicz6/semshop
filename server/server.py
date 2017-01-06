@@ -10,6 +10,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_PATH
+app.app_context().push()
 db.init_app(app)
 app.register_blueprint(frontend)
 app.register_blueprint(backend_endpoints)
