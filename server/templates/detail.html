@@ -52,7 +52,18 @@
 
   <div class="control-group">
     <label>Genes</label>
-    <textarea name="genes" ng-model="editProduct.product.genes"></textarea>
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>Gene</th>
+        <th>Remove</th>
+      </tr>
+      <tr ng-repeat="gene in editProduct.product.genes">
+        <td>{{gene.category}}</td>
+        <td>{{gene.gene}}</td>
+        <td><button ng-click="removeGene(gene)">Remove</button></td>
+      </tr>
+    </table>
   </div>  
  
   <!-- <label>Description</label>

@@ -124,7 +124,12 @@ angular.module('product', ['ngRoute', 'firebase'])
 
   $scope.addGene = function(category, gene) {
     if (editProduct.product.genes === undefined) editProduct.product.genes = [];
-    editProduct.product.genes.push(category + ", " + gene);
+    var genes = $filter('filter')(editProduct.product.genes, {"category": category, "gene": gene}, true);
+    if (genes.length == 0) editProduct.product.genes.push({"category": category,"gene": gene});
+  }
+  $scope.removeGene = function(gene) {
+    var geneIndex = editProduct.product.genes.indexOf(gene);
+    if (geneIndex != -1) editProduct.product.genes.splice(geneIndex, 1);
   }
 })
  
