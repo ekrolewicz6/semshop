@@ -12,7 +12,7 @@ backend_endpoints = Blueprint('backend_endpoints', __name__,
 @backend_endpoints.route('/endpoints/categories')
 def get_categories():
     try:
-        return json.dumps([c.name for c in Category.query.all()])
+        return json.dumps([c.json() for c in Category.query.all()])
     except TemplateNotFound:
         abort(404)
 
@@ -27,5 +27,12 @@ def get_genes(category_id=None):
 def search_genes(query=None):
     try:
         return json.dumps([g.json() for g in Gene.query.filter(Gene.name.ilike("%" + query + "%")).all()])
+    except TemplateNotFound:
+        abort(404)
+
+@backend_endpoints.route('/endpoints/products')
+def get_products():
+    try:
+        return json.dumps([c.json() for c in Product.query.all()])
     except TemplateNotFound:
         abort(404)
