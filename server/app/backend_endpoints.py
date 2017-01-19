@@ -12,7 +12,7 @@ backend_endpoints = Blueprint('backend_endpoints', __name__,
 @backend_endpoints.route('/endpoints/categories')
 def get_categories():
     try:
-        return json.dumps([c.json() for c in Category.query.all()])
+        return json.dumps([c.name for c in Category.query.all()])
     except TemplateNotFound:
         abort(404)
 
