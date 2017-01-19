@@ -6,28 +6,41 @@
 		<title>Semshop Input Form</title>
 	</head>
 	<script type="text/javascript">
-		var genes_list = { 
-			"manufacturer":["samsung", "microsoft", "brother"], 
-             			   "department": ["electronics", "books", "movies"],
-             			   "product_category": ["printer", "video_game_console"]
-         }
+		// Create a new XMLHttpRequest.
+		var request = new XMLHttpRequest();
 
+		// Handle state changes for the request.
+		request.onreadystatechange = function(response) {
+		  if (request.readyState === 4) {
+		    if (request.status === 200) {
+		      // Parse the JSON
+		      var jsonOptions = JSON.parse(request.responseText);
 
-		window.onload = function () {
-	    	var categorySel = document.getElementById("categorySel");
-	    	var geneSel = document.getElementById("geneSel");
-	    	for (var category in genes_list){
-	        	categorySel.options[categorySel.options.length] = new Option(category,category);
-	    	}
-	    	categorySel.onchange = function(){
-	    		geneSel.length = 1;
-	    		if (this.selectedIndex < 1) return;
-	    		var genes = genes_list[this.value]
-	    		for (gene in genes) {
-            		geneSel.options[geneSel.options.length] = new Option(genes[gene], genes[gene]);
-        		}
-	    	}
-	    	}
+		      // Loop over the JSON array.
+		      jsonOptions.forEach(function(item) {
+		        // Create a new <option> element.
+		        var option = document.createElement('option');
+		        // Set the value using the item in the JSON array.
+		        option.value = item;
+		        // Add the <option> element to the <datalist>.
+		        dataList.appendChild(option);
+		      });
+
+		      // Update the placeholder text.	
+		      input.placeholder = "e.g. datalist";
+		    } else {
+		      // An error occured :(
+		      input.placeholder = "Couldn't load datalist options :(";
+		    }
+		  }
+		};
+
+		// Update the placeholder text.
+		input.placeholder = "Loading options...";
+
+		// Set up and make the request.
+		request.open('GET', '/html-elements.json', true);
+		request.send();
 	</script>
 
 	<body>
@@ -43,15 +56,14 @@
 		<p> Product Date: <input type="text" name="product_date"/></p>
 		<br>
 		<p> Gene Category: 
-			<select name="category" id="categorySel" size="1">
-         	<option value="" selected="selected">Select Category</option>
-         </select>
+			<input type="text" id="ajax" list="json-datalist" placeholder="Select/Create Category">
+			<datalist id="json-datalist"></datalist>
 		</p>
 		<br>
 		<p> Gene Name: 
-    		<select name="genes" id="geneSel" size="1">
-        	<option value="" selected="selected"> Select Gene </option>
-        </select>
+    		<datalist name="genes" id="geneSel" size="1">
+        	<option value="" datalisted="datalisted"> datalist Gene </option>
+        </datalist>
 		</p>
 
 		<input type="submit" value="Submit" />
