@@ -9,6 +9,10 @@
         Not a URL</span>
   </div>
 
+  <div class="control-group">
+    <button type="button" ng-click="loadProductData(editProduct.product.site)">Load Product Info</button>
+  </div>
+
   <div class="control-group" ng-class="{error: myForm.sku.$invalid && !myForm.sku.$pristine}">
     <label>SKU</label>
     <input type="text" name="sku" ng-model="editProduct.product.sku" required>

@@ -5,6 +5,7 @@ from jinja2 import TemplateNotFound
 from datetime import datetime
 from app.db import *
 import json
+from parsers import amazon_parser
 
 frontend = Blueprint('frontend', __name__,
                         template_folder='templates', static_url_path='static')
@@ -31,6 +32,11 @@ def add_data_points():
     except TemplateNotFound:
         abort(404)
 
+@frontend.route('/get_product_data', methods=["POST"])
+def get_product_data():
+    url = json.loads(request.data)["url"]
+    product_info = amazon_parser.get_product_info(url)
+    return json.dumps(product_info)
 
 @frontend.route('/templates/<path:path>')
 def send_templates(path):

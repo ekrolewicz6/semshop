@@ -131,6 +131,16 @@ angular.module('product', ['ngRoute', 'firebase'])
     var geneIndex = editProduct.product.genes.indexOf(gene);
     if (geneIndex != -1) editProduct.product.genes.splice(geneIndex, 1);
   }
+
+  $scope.loadProductData = function(url) {
+    if (url.length == 0) return;
+    return $http.post('http://localhost:5000/' + 'get_product_data', {"url": url}).then(function(response) {
+      editProduct.product.name = response.data.name;
+      editProduct.product.price = response.data.price;
+      editProduct.product.genes = response.data.genes;
+      editProduct.product.sku = response.data.sku;
+    });
+  }
 })
  
 .controller('EditProductController',
