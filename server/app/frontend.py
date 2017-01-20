@@ -27,8 +27,13 @@ def add_data_points():
     	product_url = form_data['site']
     	product_name = form_data['name']
         product_price = form_data['price']
+        prod = Product(sku=product_sku, url=product_url, name=product_name)
+        prod_price = ProductPrice(product=prod, price=product_price)
+        db.session.add(prod)
+        db.session.add(prod_price)
+        db.session.commit()
         return json.dumps([product_date.isoformat(), product_sku, product_url, product_name, product_price])
-        return render_template('index.html')
+        # return render_template('index.html')
     except TemplateNotFound:
         abort(404)
 

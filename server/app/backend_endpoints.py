@@ -33,6 +33,6 @@ def search_genes(query=None):
 @backend_endpoints.route('/endpoints/products')
 def get_products():
     try:
-        return json.dumps([c.json() for c in Product.query.all()])
+        return json.dumps([p.json() for p in Product.query.all()])
     except TemplateNotFound:
         abort(404)

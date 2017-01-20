@@ -28,7 +28,7 @@ class Product(db.Model):
 
     def json(self):
         return {
-            'id'         : self.id,
+            'id': self.id,
             'name': self.name,
             'sku': self.sku,
             'url': self.url

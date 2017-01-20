@@ -20,7 +20,7 @@ if __name__ == "__main__":
 	# c1 = Category("Department")
 	# g1 = Gene(c1, "Electronics")
 	# g2 = Gene(c1, "Books")
-	# # db.session.add(c1)
+	# db.session.add(c1)
 	# db.session.add(g1)
 	# db.session.add(g2)
 	# db.session.commit()
