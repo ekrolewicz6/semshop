@@ -10,11 +10,11 @@
   </div>
 
   <div class="control-group">
-    <button type="button" ng-click="loadProductData(editProduct.product.site)">Load Product Info</button>
+    <button type="button" ng-click="loadProductData(editProduct.product.site)"> Load More Info </button>
   </div>
 
   <div class="control-group" ng-class="{error: myForm.sku.$invalid && !myForm.sku.$pristine}">
-    <label>SKU</label>
+    <label>KU</label>
     <input type="text" name="sku" ng-model="editProduct.product.sku" required>
     <span ng-show="myForm.sku.$error.required && !myForm.sku.$pristine" class="help-inline">
         Required {{myForm.sku.$pristine}}</span>
